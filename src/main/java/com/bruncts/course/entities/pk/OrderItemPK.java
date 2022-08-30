@@ -1,7 +1,6 @@
 package com.bruncts.course.entities.pk;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
