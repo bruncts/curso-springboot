@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bruncts.course.entities.UserC;
 import com.bruncts.course.repositories.UserCRepository;
+import com.bruncts.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserCService {
@@ -21,7 +22,7 @@ public class UserCService {
 	
 	public UserC findById(Long id) {
 		Optional<UserC>  obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id));
 	}
 	
 	public UserC insert(UserC obj) {
