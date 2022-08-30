@@ -32,4 +32,16 @@ public class UserCService {
 		repository.deleteById(id);
 	}
 	
+	public UserC update(Long id, UserC obj) {
+		UserC entity = repository.getOne(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void updateData(UserC entity, UserC obj) {
+		entity.setName(obj.getName());	
+		entity.setEmail(obj.getEmail());	
+		entity.setPhone(obj.getPhone());	
+	}
+	
 }
