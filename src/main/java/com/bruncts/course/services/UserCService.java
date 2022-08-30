@@ -3,6 +3,8 @@ package com.bruncts.course.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,9 +45,13 @@ public class UserCService {
 	}
 	
 	public UserC update(Long id, UserC obj) {
+		try {
 		UserC entity = repository.getOne(id);
 		updateData(entity, obj);
-		return repository.save(entity);
+		return repository.save(entity);}
+		catch (EntityNotFoundException e){
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(UserC entity, UserC obj) {
